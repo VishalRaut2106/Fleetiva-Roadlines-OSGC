@@ -8,6 +8,8 @@ export default function AdminDashboard() {
   const [matchingTrucks, setMatchingTrucks] = useState({});
   const [loading, setLoading] = useState(true);
   const [hoveredCard, setHoveredCard] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all");
 
   useEffect(() => {
     fetchData();
@@ -68,6 +70,17 @@ export default function AdminDashboard() {
   const downloadBilty = (id) => window.open(`http://127.0.0.1:5001/api/booking/${id}/bilty?token=${localStorage.getItem("accessToken")}`, "_blank");
   const downloadInvoice = (id) => window.open(`http://127.0.0.1:5001/api/booking/${id}/invoice?token=${localStorage.getItem("accessToken")}`, "_blank");
 
+  const filteredLoads = loads.filter(load => {
+    const matchesSearch = 
+      load.material.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      load.from.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      load.to.toLowerCase().includes(searchTerm.toLowerCase());
+    
+    const matchesStatus = statusFilter === "all" || load.status === statusFilter;
+    
+    return matchesSearch && matchesStatus;
+  });
+
   return (
     <div style={styles.container}>
       <div style={styles.content}>
@@ -90,7 +103,27 @@ export default function AdminDashboard() {
         </div>
 
         <h3 style={styles.sectionTitle}>Available Loads</h3>
-        {loading ? <p>Loading...</p> : loads.map(load => (
+        <div style={styles.filterBar}>
+          <input 
+            type="text" 
+            placeholder="Search material or location..." 
+            style={styles.searchInput}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <select 
+            style={styles.selectInput}
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+          >
+            <option value="all">All Statuses</option>
+            <option value="pending">Pending</option>
+            <option value="matched">Matched</option>
+            <option value="delivered">Delivered</option>
+          </select>
+        </div>
+
+        {loading ? <p>Loading...</p> : filteredLoads.map(load => (
           <div 
             key={load._id} 
             style={{...styles.card, ...(hoveredCard === load._id ? styles.cardHover : {})}}
@@ -142,6 +175,28 @@ const styles = {
   content: {
     width: "100%",
     maxWidth: "1000px",
+  },
+  filterBar: {
+    display: 'flex',
+    gap: '15px',
+    marginBottom: '20px',
+    flexWrap: 'wrap'
+  },
+  searchInput: {
+    flex: 1,
+    minWidth: '200px',
+    padding: '10px 15px',
+    borderRadius: '8px',
+    border: '1px solid #d1d5db',
+    outline: 'none',
+  },
+  selectInput: {
+    padding: '10px 15px',
+    borderRadius: '8px',
+    border: '1px solid #d1d5db',
+    backgroundColor: '#fff',
+    outline: 'none',
+    cursor: 'pointer'
   },
   title: {
     fontSize: "28px",

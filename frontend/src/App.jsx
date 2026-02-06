@@ -6,8 +6,8 @@ import { AppContext } from "./context/AppContext";
 import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import AdminDashboard from "./pages/admin/AdminDashboard";
-import CustomerDashboard from "./pages/customer/CustomerDashboard";
+import AdminDashboard from "./pages/AdminDashboard";
+// import CustomerDashboard from "./pages/customer/CustomerDashboard";
 
 /* ================= PROTECTED ROUTE ================= */
 const ProtectedRoute = ({ children, role }) => {

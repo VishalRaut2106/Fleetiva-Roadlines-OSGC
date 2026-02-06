@@ -3,8 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import api from "../api/axios";
 import { AppContext } from "../context/AppContext";
 import Toast from "../components/Toast";
-import { signInWithPopup } from "firebase/auth";
-import { auth, googleProvider } from "../firebase";
+// import { signInWithPopup } from "firebase/auth";
+// import { auth, googleProvider } from "../firebase";
 
 export default function Login() {
   const navigate = useNavigate();

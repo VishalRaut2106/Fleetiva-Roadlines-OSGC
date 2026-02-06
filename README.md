@@ -33,6 +33,14 @@ It provides a centralized ecosystem for Logistics Companies (Tenants) to manage 
 ---
 
 ## 🚀 Getting Started
+## 🚀 Quick Start (Beginner Friendly)
+
+Follow these steps to run the project locally.
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/your-username/Fleetiva-Roadlines.git
+cd Fleetiva-Roadlines
 
 ### Prerequisites
 

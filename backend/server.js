@@ -91,29 +91,21 @@ if (process.env.SKIP_FIREBASE === "true") {
   console.warn("⚠️ Firebase env not set — running without Firebase");
 }
 
-// ================= DATABASE =================
-connectMongo()
-  .then(() => console.log("✅ MongoDB connected"))
-  .catch((err) => {
-    console.error("❌ MongoDB connection failed:", err.message);
-    process.exit(1);
-  });
-
-// ================= HEALTH ROUTE =================
-app.get("/", (req, res) => {
-  res.json({ status: "Fleetiva backend running" });
-});
-
-// ================= API ROUTES =================
-app.use("/api/auth", require("./routes/auth"));
-app.use("/api/logistics", require("./routes/logistics"));
-
-// ================= ERROR HANDLER =================
-app.use(errorHandler);
-
-// ================= SERVER START =================
+// ================= SERVER START & EXPORT =================
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-});
+if (require.main === module) {
+  // Only connect to DB and start server if run directly
+  connectMongo()
+    .then(() => console.log("✅ MongoDB connected"))
+    .catch((err) => {
+      console.error("❌ MongoDB connection failed:", err.message);
+      process.exit(1);
+    });
+
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+  });
+}
+
+module.exports = app;

@@ -1,11 +1,5 @@
-const express = require('express');
-const { authenticate, authorize } = require('../middleware/combinedAuth');
-
+const express = require("express");
 const router = express.Router();
 
-// Placeholder routes for logistics
-router.get('/', authenticate, (req, res) => {
-  res.json({ message: 'Logistics endpoint' });
-});
-
+const { authenticate, authorize } = require('../middleware/combinedAuth');
 module.exports = router;

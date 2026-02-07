@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import api from "../api/axios";
 import { getApiBaseUrl } from "../api/baseUrl";
 import { safeStorage } from "../utils/storage";
@@ -98,6 +99,10 @@ export default function AdminDashboard() {
 
   return (
     <div className="page">
+      <Helmet>
+        <title>Admin Dashboard - Fleetiva Roadlines</title>
+        <meta name="description" content="Administer users, match loads with trucks, and manage bookings." />
+      </Helmet>
       <div className="page-content">
         <div className="page-header">
           <div>
@@ -202,13 +207,12 @@ export default function AdminDashboard() {
                   </p>
                 </div>
                 <span
-                  className={`tag ${
-                    b.status === "delivered"
-                      ? "success"
-                      : b.status === "matched"
+                  className={`tag ${b.status === "delivered"
+                    ? "success"
+                    : b.status === "matched"
                       ? "info"
                       : "warning"
-                  }`}
+                    }`}
                 >
                   {b.status}
                 </span>

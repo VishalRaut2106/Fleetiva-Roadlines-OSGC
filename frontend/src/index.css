@@ -610,7 +610,9 @@ textarea:focus {
   align-items: flex-start;
   gap: 14px;
   box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .profile-stat-card:hover {
@@ -1036,7 +1038,9 @@ textarea:focus {
   align-items: flex-start;
   gap: 14px;
   box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .stats-earnings-card:hover {
@@ -1219,7 +1223,9 @@ textarea:focus {
   align-items: flex-start;
   gap: 14px;
   box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .stats-future-card:hover {
@@ -1549,4 +1555,83 @@ textarea:focus {
   .myloads-card-body {
     padding: 16px;
   }
+}
+.navbar-actions {
+  position: relative;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #2563eb;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Dropdown */
+.dropdown-menu {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  width: 200px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  padding: 8px 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  animation: dropdownFade 0.15s ease-out;
+}
+
+.dropdown-item {
+  padding: 10px 14px;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background: #f3f4f6;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 6px 0;
+}
+
+.logout {
+  color: #dc2626;
+}
+
+/* Smooth open */
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.logout {
+  color: #dc2626;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.logout:hover {
+  background: #fee2e2;
+  color: #b91c1c;
 }

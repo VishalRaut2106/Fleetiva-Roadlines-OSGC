@@ -60,6 +60,7 @@ export default function Navbar() {
         </div>
 
         {/* Avatar Section */}
+        {/* Avatar Section */}
         <div className="navbar-actions" ref={dropdownRef}>
           <div
             className="avatar"
@@ -71,10 +72,22 @@ export default function Navbar() {
 
           {open && (
             <div className="dropdown-menu">
-              <NavLink to="/profile">My Profile</NavLink>
-              <NavLink to="/stats">My Stats</NavLink>
-              <NavLink to="/my-loads">My Loads</NavLink>
-              <button onClick={logout}>Logout</button>
+              <NavLink to="/profile" className="dropdown-item">
+                👤 My Profile
+              </NavLink>
+
+              <NavLink to="/stats" className="dropdown-item">
+                📊 My Stats
+              </NavLink>
+
+              <NavLink to="/my-loads" className="dropdown-item">
+                🚚 My Loads
+              </NavLink>
+
+              <div className="dropdown-divider" />
+              <button className="dropdown-item logout" onClick={logout}>
+                Logout
+              </button>
             </div>
           )}
         </div>

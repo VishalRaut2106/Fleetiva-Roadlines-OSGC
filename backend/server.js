@@ -1,9 +1,9 @@
-require('dotenv').config();
+require("dotenv").config();
 
-const app = require('./app');
-const { connectMongo } = require('./config/db2');
+const app = require("./app");
+const { connectMongo } = require("./config/db2");
 
-require('./config/clients');
+require("./config/clients");
 
 require("./config/clients");
 
@@ -21,6 +21,7 @@ const allowedOrigins = new Set(
     .flatMap((value) => value.split(","))
     .map((value) => value.trim())
     .filter(Boolean)
+    .filter(Boolean),
 );
 
 const isOriginAllowed = (origin) => {
@@ -40,6 +41,7 @@ app.use((req, res, next) => {
   res.setHeader(
     "Strict-Transport-Security",
     "max-age=31536000; includeSubDomains; preload"
+    "max-age=31536000; includeSubDomains; preload",
   );
   res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
   next();
@@ -57,6 +59,7 @@ app.use(
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   })
+  }),
 );
 
 app.use(express.json());
@@ -101,12 +104,27 @@ app.use("/api/logistics", require("./routes/logistics"));
 app.use(errorHandler);
 
 // ================= SERVER START & EXPORT =================
+// ================= DATABASE =================
 connectMongo()
-  .then(() => console.log('✅ MongoDB connected'))
+  .then(() => console.log("✅ MongoDB connected"))
   .catch((err) => {
-    console.error('❌ MongoDB connection failed:', err.message);
+    console.error("❌ MongoDB connection failed:", err.message);
     process.exit(1);
   });
+
+// ================= HEALTH ROUTE =================
+app.get("/", (req, res) => {
+  res.json({ status: "Fleetiva backend running" });
+});
+
+// ================= API ROUTES =================
+app.use("/api/auth", require("./routes/auth"));
+app.use("/api", require("./routes/logistics"));
+
+// ================= ERROR HANDLER =================
+app.use(errorHandler);
+
+// ================= SERVER START =================
 
 const PORT = process.env.PORT || 5000;
 
